@@ -62,7 +62,6 @@
     var params = {};
     MP.api.jql(script_one, params).done(function(results) {
       MP.api.jql(script_two, {}).done(function(moreResults) {
-        console.log(results);
         var res = {};
         _.each(results, function(item) {
           if(res[item.key[0]] === undefined) {
@@ -71,11 +70,10 @@
             res[item.key[0]][item.key[1]] = {'Name': item.key[0], 'Group': item.key[1], 'Users': item.value}
           }
         });
-        console.log(moreResults);
         _.each(moreResults, function(item) {
           res[item.key[0]][item.key[1]]['30Day'] = item.value;
         });
-        eventTable.MPTable('setData', final);
+        console.log(res);
         chartIt(res);
       });
     });
@@ -84,7 +82,10 @@
   var chartIt = function(data) {
       console.log(data);
       _.each(data, function(item) {
+        console.log(item);
         _.each(data[item.key], function(items) {
+          if(data[item.key]['30Day'] === undefined) { data[item.key]['30Day'] = 0;}
+          if(data[item.key]['90Day'] === undefined) { data[item.key]['90Day'] = 0;}
           $('table#resultsTable').append(
             '<tr>' +
             '<td>' + data[item.key]['Name'] + '</td>' +
