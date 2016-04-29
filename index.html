@@ -95,22 +95,22 @@
   
   var chartIt = function(data) {
       console.log(data);
-      _.each(data, function(item) {
-        console.log(item);
-        _.each(data[item.key], function(items) {
-          if(data[item.key]['30Day'] === undefined) { data[item.key]['30Day'] = 0;}
-          if(data[item.key]['90Day'] === undefined) { data[item.key]['90Day'] = 0;}
+      var keys = Object.keys(data);
+      for(i=0; i<keys.length; i++) {
+        _.each(data[keys[i]], function(items) {
+          if(data[keys[i]][item.key]['30Day'] === undefined) { data[keys[i]][item.key]['30Day'] = 0;}
+          if(data[keys[i]][item.key]['90Day'] === undefined) { data[keys[i]][item.key]['90Day'] = 0;}
           $('table#resultsTable').append(
             '<tr>' +
-            '<td>' + data[item.key]['Name'] + '</td>' +
-            '<td>' + data[item.key]['Group'] + '</td>' +
-            '<td>' + data[item.key]['Users'] + '</td>' +
-            '<td>' + data[item.key]['30Day'] + '</td>' +
-            '<td>' + data[item.key]['90Day'] + '</td>' +
+            '<td>' + data[keys[i]][item.key]['Name'] + '</td>' +
+            '<td>' + data[keys[i]][item.key]['Group'] + '</td>' +
+            '<td>' + data[keys[i]][item.key]['Users'] + '</td>' +
+            '<td>' + data[keys[i]][item.key]['30Day'] + '</td>' +
+            '<td>' + data[keys[i]][item.key]['90Day'] + '</td>' +
             '</tr>'
         );
         })
-      });
+      }
     }
     
   runQuery();
