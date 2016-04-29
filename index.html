@@ -29,8 +29,7 @@
   <script id='query_two'>
     function main() {
       var events = ["Comment", "Like", "Donation", "Product Purchase - Step3", "Volunteer Experience Share", "Campaign Social Share", "Volunteer Experience View"];
-      return join(
-        function get30days() {
+      function get30days() {
           var date = new Date();
           var oldDate = new Date().setDate(date.getDate()-30);
           return oldDate.toISOString().substring(0, 10);
@@ -39,6 +38,7 @@
           var date = new Date();
           return date.toISOString().substring(0, 10);
         }
+      return join(
         Events({
           from_date: get30days(),
           to_date: getToday(),
