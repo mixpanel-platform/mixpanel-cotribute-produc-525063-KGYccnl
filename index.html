@@ -49,12 +49,12 @@
       MP.api.jql(script_two, {}).done(function(moreResults) {
         console.log(results);
         var res = {};
-        _.each(results, function(item)) {
+        _.each(results, function(item) {
           // add combos and uniques
-        }
-        _.each(moreResults, function(item)) {
+        });
+        _.each(moreResults, function(item) {
           // add events
-        }
+        });
         eventTable.MPTable('setData', final);
       });
     });
