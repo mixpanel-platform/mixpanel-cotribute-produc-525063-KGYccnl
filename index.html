@@ -32,7 +32,9 @@
       .groupBy(['user.properties.Company Name', 'user.properties.Company Group'], mixpanel.reducer.count());
     }
   </script>
-  <div id="resultsTable" style='width:943px'></div><br>
+  <div>
+    <table id="resultsTable"></table>
+  </div>
   <script>
   var script_one = document.getElementById('query_one').innerHTML;
   var script_two = document.getElementById('query_two').innerHTML;
