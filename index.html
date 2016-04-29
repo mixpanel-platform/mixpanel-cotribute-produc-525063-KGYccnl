@@ -70,6 +70,7 @@
             res[item.key[0]][item.key[1]] = {'Name': item.key[0], 'Group': item.key[1], 'Users': item.value}
           }
         });
+        console.log(res);
         _.each(moreResults, function(item) {
           res[item.key[0]][item.key[1]]['30Day'] = item.value;
         });
