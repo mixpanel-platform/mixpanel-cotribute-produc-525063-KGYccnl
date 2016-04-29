@@ -66,10 +66,8 @@
         _.each(results, function(item) {
           if(res[item.key[0]] === undefined) {
             res[item.key[0]] = {};
-            res[item.key[0]][item.key[1]] = {'Name': item.key[0], 'Group': item.key[1], 'Users': item.value};
-          } else {
-            res[item.key[0]][item.key[1]] = {'Name': item.key[0], 'Group': item.key[1], 'Users': item.value};
           }
+          res[item.key[0]][item.key[1]] = {'Name': item.key[0], 'Group': item.key[1], 'Users': item.value};
         });
         console.log(res);
         _.each(moreResults, function(item) {
