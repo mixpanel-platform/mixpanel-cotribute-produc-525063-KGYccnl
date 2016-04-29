@@ -30,13 +30,13 @@
     function main() {
       var events = ["Comment", "Like", "Donation", "Product Purchase - Step3", "Volunteer Experience Share", "Campaign Social Share", "Volunteer Experience View"];
       function get30days() {
-          var oldDate = new Date(new Date() - 60*60*24*30*1000);
-          return oldDate.toISOString().substring(0, 10);
-        }
-        function getToday() {
-          var date = new Date();
-          return date.toISOString().substring(0, 10);
-        }
+        var oldDate = new Date(new Date() - 60*60*24*30*1000);
+        return oldDate.toISOString().substring(0, 10);
+      }
+      function getToday() {
+        var date = new Date();
+        return date.toISOString().substring(0, 10);
+      }
       return join(
         Events({
           from_date: get30days(),
@@ -56,10 +56,18 @@
   <script id='query_three'>
     function main() {
       var events = ["Comment", "Like", "Donation", "Product Purchase - Step3", "Volunteer Experience Share", "Campaign Social Share", "Volunteer Experience View"];
+      function get30days() {
+        var oldDate = new Date(new Date() - 60*60*24*90*1000);
+        return oldDate.toISOString().substring(0, 10);
+      }
+      function getToday() {
+        var date = new Date();
+        return date.toISOString().substring(0, 10);
+      }
       return join(
         Events({
-          from_date: "2016-01-30",
-          to_date: "2016-04-29",
+          from_date: get30days(),
+          to_date: getToday(),
         }),
         People()
       ).filter(function(tuple) {
