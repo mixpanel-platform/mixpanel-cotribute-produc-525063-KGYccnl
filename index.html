@@ -58,9 +58,9 @@
             '<tr>' +
             '<td>' + "Company Name" + '</td>' +
             '<td>' + "Company Group" + '</td>' +
-            '<td>' + "Skill" + '</td>' +
-            '<td>' + "Rating" + '</td>' +
-            '<td>' + "Review" + '</td>' +
+            '<td>' + "Total Users" + '</td>' +
+            '<td>' + "Unique Engagement Events 30 Day" + '</td>' +
+            '<td>' + "Unique Engagement Events 90 Day" + '</td>' +
             '</tr>'
           );
       $('table#resultsTable').append(
@@ -83,7 +83,6 @@
           }
           res[item.key[0]][item.key[1]] = {'Name': item.key[0], 'Group': item.key[1], 'Users': item.value};
         });
-        console.log(res);
         _.each(moreResults, function(item) {
           res[item.key[0]][item.key[1]]['30Day'] = item.value;
         });
@@ -99,15 +98,15 @@
       for(i=0; i<keys.length; i++) {
         _.each(data[keys[i]], function(item) {
           console.log(item);
-          if(data[keys[i]][item.key]['30Day'] === undefined) { data[keys[i]][item.key]['30Day'] = 0;}
-          if(data[keys[i]][item.key]['90Day'] === undefined) { data[keys[i]][item.key]['90Day'] = 0;}
+          if(item['30Day'] === undefined) { item['30Day'] = 0;}
+          if(item['90Day'] === undefined) { item['90Day'] = 0;}
           $('table#resultsTable').append(
             '<tr>' +
-            '<td>' + data[keys[i]][item.key]['Name'] + '</td>' +
-            '<td>' + data[keys[i]][item.key]['Group'] + '</td>' +
-            '<td>' + data[keys[i]][item.key]['Users'] + '</td>' +
-            '<td>' + data[keys[i]][item.key]['30Day'] + '</td>' +
-            '<td>' + data[keys[i]][item.key]['90Day'] + '</td>' +
+            '<td>' + item['Name'] + '</td>' +
+            '<td>' + item['Group'] + '</td>' +
+            '<td>' + item['Users'] + '</td>' +
+            '<td>' + item['30Day'] + '</td>' +
+            '<td>' + item['90Day'] + '</td>' +
             '</tr>'
         );
         })
