@@ -32,9 +32,7 @@
       .groupBy(['user.properties.Company Name', 'user.properties.Company Group'], mixpanel.reducer.count());
     }
   </script>
-  Date: <br>
-  <div id="dateSelect"></div>
-  <div id="table" style='width:943px'></div><br>
+  <div id="resultsTable" style='width:943px'></div><br>
   <script>
   var script_one = document.getElementById('query_one').innerHTML;
   var script_two = document.getElementById('query_two').innerHTML;
@@ -78,7 +76,7 @@
         });
         console.log(moreResults);
         _.each(moreResults, function(item) {
-          // add events
+          res[item.key[0]][item.key[1]]['30Day'] = item.value;
         });
         eventTable.MPTable('setData', final);
         chartIt(res);
@@ -90,7 +88,7 @@
       console.log(data);
       _.each(data, function(item) {
         _.each(data[item.key], function(items) {
-          $('table#table').append(
+          $('table#resultsTable').append(
             '<tr>' +
             '<td>' + data[item.key]['Name'] + '</td>' +
             '<td>' + data[item.key]['Group'] + '</td>' +
