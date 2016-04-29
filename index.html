@@ -30,8 +30,27 @@
       var events = ["Comment", "Like", "Donation", "Product Purchase - Step3", "Volunteer Experience Share", "Campaign Social Share", "Volunteer Experience View"];
       return join(
         Events({
-          from_date: moment(),
-          to_date: moment(),
+          from_date: "2016-03-30",
+          to_date: "2016-04-29",
+        }),
+        People()
+      ).filter(function(tuple) {
+        if(tuple.user !== undefined && tuple.user.properties['Company Status'] == 'active') {
+          if(tuple.event !== undefined && events.indexOf(tuple.event.name) > -1) {
+            return tuple;
+          }
+        }
+      })
+      .groupBy(['user.properties.Company Name', 'user.properties.Company Group'], mixpanel.reducer.count());
+    }
+  </script>
+  <script id='query_three'>
+    function main() {
+      var events = ["Comment", "Like", "Donation", "Product Purchase - Step3", "Volunteer Experience Share", "Campaign Social Share", "Volunteer Experience View"];
+      return join(
+        Events({
+          from_date: "2016-01-30",
+          to_date: "2016-04-29",
         }),
         People()
       ).filter(function(tuple) {
@@ -76,18 +95,23 @@
     var params = {};
     MP.api.jql(script_one, params).done(function(results) {
       MP.api.jql(script_two, {}).done(function(moreResults) {
-        var res = {};
-        _.each(results, function(item) {
-          if(res[item.key[0]] === undefined) {
-            res[item.key[0]] = {};
-          }
-          res[item.key[0]][item.key[1]] = {'Name': item.key[0], 'Group': item.key[1], 'Users': item.value};
+        MP.api.jql(script_two, {}).done(function(lastResults) {
+          var res = {};
+          _.each(results, function(item) {
+            if(res[item.key[0]] === undefined) {
+              res[item.key[0]] = {};
+            }
+            res[item.key[0]][item.key[1]] = {'Name': item.key[0], 'Group': item.key[1], 'Users': item.value};
+          });
+          _.each(moreResults, function(item) {
+            res[item.key[0]][item.key[1]]['30Day'] = item.value;
+          });
+          _.each(lastResults, function(item) {
+            res[item.key[0]][item.key[1]]['90Day'] = item.value;
+          });
+          console.log(res);
+          chartIt(res);
         });
-        _.each(moreResults, function(item) {
-          res[item.key[0]][item.key[1]]['30Day'] = item.value;
-        });
-        console.log(res);
-        chartIt(res);
       });
     });
   }
