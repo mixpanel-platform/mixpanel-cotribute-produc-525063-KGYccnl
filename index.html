@@ -70,8 +70,13 @@
         console.log(results);
         var res = {};
         _.each(results, function(item) {
-          // add combos and uniques
+          if(res[item.key[0]] === undefined) {
+            res[item.key[0]] = {};
+          } else {
+            res[item.key[0]][item.key[1]] = {'Name': item.key[0], 'Group': item.key[1], 'Users': item.value}
+          }
         });
+        console.log(moreResults);
         _.each(moreResults, function(item) {
           // add events
         });
@@ -83,17 +88,19 @@
   
   var chartIt = function(data) {
       console.log(data);
-      for(i=0; i<data.length; i+=5){
-        $('table#table').append(
+      _.each(data, function(item) {
+        _.each(data[item.key], function(items) {
+          $('table#table').append(
             '<tr>' +
-            '<td>' + data[i] + '</td>' +
-            '<td>' + data[i+1] + '</td>' +
-            '<td>' + data[i+2] + '</td>' +
-            '<td>' + data[i+3] + '</td>' +
-            '<td>' + data[i+4] + '</td>' +
+            '<td>' + data[item.key]['Name'] + '</td>' +
+            '<td>' + data[item.key]['Group'] + '</td>' +
+            '<td>' + data[item.key]['Users'] + '</td>' +
+            '<td>' + data[item.key]['30Day'] + '</td>' +
+            '<td>' + data[item.key]['90Day'] + '</td>' +
             '</tr>'
         );
-      }
+        })
+      });
     }
     
   dateSelect.on('change', function() {runQuery();});
