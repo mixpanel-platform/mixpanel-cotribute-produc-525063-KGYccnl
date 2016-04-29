@@ -30,9 +30,18 @@
     function main() {
       var events = ["Comment", "Like", "Donation", "Product Purchase - Step3", "Volunteer Experience Share", "Campaign Social Share", "Volunteer Experience View"];
       return join(
+        function get30days() {
+          var date = new Date();
+          var oldDate = new Date().setDate(date.getDate()-30);
+          return oldDate.toISOString().substring(0, 10);
+        }
+        function getToday() {
+          var date = new Date();
+          return date.toISOString().substring(0, 10);
+        }
         Events({
-          from_date: "2016-03-30",
-          to_date: "2016-04-29",
+          from_date: get30days(),
+          to_date: getToday(),
         }),
         People()
       ).filter(function(tuple) {
