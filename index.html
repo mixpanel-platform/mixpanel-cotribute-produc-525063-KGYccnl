@@ -41,6 +41,26 @@
   var dateSelect = $('#dateSelect').MPDatepicker();
   var eventTable = $('#table').MPTable({showPercentages: false, firstColHeader: 'Frequency'});
   function runQuery() {
+    
+    $('table#resultsTable').append(
+            '<tr>' +
+            '<td>' + "Company Name" + '</td>' +
+            '<td>' + "Company Group" + '</td>' +
+            '<td>' + "Skill" + '</td>' +
+            '<td>' + "Rating" + '</td>' +
+            '<td>' + "Review" + '</td>' +
+            '</tr>'
+          );
+      $('table#resultsTable').append(
+            '<tr>' +
+            '<td>' + "---" + '</td>' +
+            '<td>' + "---" + '</td>' +
+            '<td>' + "---" + '</td>' +
+            '<td>' + "---" + '</td>' +
+            '<td>' + "---" + '</td>' +
+            '</tr>'
+          );
+    
     var params = {
       'from_date': dateSelect.MPDatepicker('value').from.toISOString().slice(0, -14),
       'to_date': dateSelect.MPDatepicker('value').to.toISOString().slice(0, -14),
@@ -56,9 +76,26 @@
           // add events
         });
         eventTable.MPTable('setData', final);
+        chartIt(res);
       });
     });
   }
+  
+  var chartIt = function(data) {
+      console.log(data);
+      for(i=0; i<data.length; i+=5){
+        $('table#table').append(
+            '<tr>' +
+            '<td>' + data[i] + '</td>' +
+            '<td>' + data[i+1] + '</td>' +
+            '<td>' + data[i+2] + '</td>' +
+            '<td>' + data[i+3] + '</td>' +
+            '<td>' + data[i+4] + '</td>' +
+            '</tr>'
+        );
+      }
+    }
+    
   dateSelect.on('change', function() {runQuery();});
   runQuery();
   </script>
