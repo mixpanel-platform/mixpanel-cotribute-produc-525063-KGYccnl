@@ -126,7 +126,6 @@
           _.each(lastResults, function(item) {
             res[item.key[0]][item.key[1]]['90Day'] = item.value;
           });
-          console.log(res);
           chartIt(res);
         });
       });
@@ -134,11 +133,9 @@
   }
   
   var chartIt = function(data) {
-      console.log(data);
       var keys = Object.keys(data);
       for(i=0; i<keys.length; i++) {
         _.each(data[keys[i]], function(item) {
-          console.log(item);
           if(item['30Day'] === undefined) { item['30Day'] = 0;}
           if(item['90Day'] === undefined) { item['90Day'] = 0;}
           $('table#resultsTable').append(
