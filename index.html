@@ -30,8 +30,8 @@
       var events = ["Comment", "Like", "Donation", "Product Purchase - Step3", "Volunteer Experience Share", "Campaign Social Share", "Volunteer Experience View"];
       return join(
         Events({
-          from_date: "2016-03-27",
-          to_date: "2016-04-25",
+          from_date: moment().subtract(30, 'days'),
+          to_date: moment(),
         }),
         People()
       ).filter(function(tuple) {
