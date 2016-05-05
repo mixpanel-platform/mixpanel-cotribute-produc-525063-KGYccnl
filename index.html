@@ -18,7 +18,7 @@
       }
     </style>
   </head>
-  <body>
+  <div>
   <script id='query_one'>
     function main() {
       return People()
@@ -87,6 +87,7 @@
   var script_one = document.getElementById('query_one').innerHTML;
   var script_two = document.getElementById('query_two').innerHTML;
   var script_three = document.getElementById('query_three').innerHTML;
+  
   function runQuery() {
     
     $('table#resultsTable').append(
@@ -163,5 +164,5 @@
     
   runQuery();
   </script>
-  </body>
+  </div>
 </html>
