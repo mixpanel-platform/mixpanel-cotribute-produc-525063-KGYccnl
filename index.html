@@ -113,6 +113,9 @@
     MP.api.jql(script_one, params).done(function(results) {
       MP.api.jql(script_two, {}).done(function(moreResults) {
         MP.api.jql(script_two, {}).done(function(lastResults) {
+          console.log(results);
+          console.log(moreResults);
+          console.log(lastResults);
           var res = {};
           _.each(results, function(item) {
             if(res[item.key[0]] === undefined) {
