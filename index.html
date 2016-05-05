@@ -50,7 +50,7 @@
           }
         }
       })
-      .groupBy(['user.properties.Company Name', 'user.properties.Company Group'], mixpanel.reducer.count());
+      .groupByUser(['user.properties.Company Name', 'user.properties.Company Group'], mixpanel.reducer.count());
     }
   </script>
   <script id='query_three'>
@@ -77,7 +77,7 @@
           }
         }
       })
-      .groupBy(['user.properties.Company Name', 'user.properties.Company Group'], mixpanel.reducer.count());
+      .groupByUser(['user.properties.Company Name', 'user.properties.Company Group'], mixpanel.reducer.count());
     }
   </script>
   <div>
@@ -124,10 +124,18 @@
             res[item.key[0]][item.key[1]] = {'Name': item.key[0], 'Group': item.key[1], 'Users': item.value};
           });
           _.each(moreResults, function(item) {
-            res[item.key[0]][item.key[1]]['30Day'] = item.value;
+            if(res[item.key[1]][item.key[2]]['30Day'] !== undefined) {
+              res[item.key[1]][item.key[2]]['30Day'] += 1;
+            } else {
+              res[item.key[1]][item.key[2]]['30Day'] = 1;
+            }
           });
           _.each(lastResults, function(item) {
-            res[item.key[0]][item.key[1]]['90Day'] = item.value;
+            if(res[item.key[1]][item.key[2]]['30Day'] !== undefined) {
+              res[item.key[1]][item.key[2]]['30Day'] += 1;
+            } else {
+              res[item.key[1]][item.key[2]]['30Day'] = 1;
+            }
           });
           chartIt(res);
         });
