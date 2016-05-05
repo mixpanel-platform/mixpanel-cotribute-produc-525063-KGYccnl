@@ -131,10 +131,10 @@
             }
           });
           _.each(lastResults, function(item) {
-            if(res[item.key[1]][item.key[2]]['30Day'] !== undefined) {
-              res[item.key[1]][item.key[2]]['30Day'] += 1;
+            if(res[item.key[1]][item.key[2]]['90Day'] !== undefined) {
+              res[item.key[1]][item.key[2]]['90Day'] += 1;
             } else {
-              res[item.key[1]][item.key[2]]['30Day'] = 1;
+              res[item.key[1]][item.key[2]]['90Day'] = 1;
             }
           });
           chartIt(res);
