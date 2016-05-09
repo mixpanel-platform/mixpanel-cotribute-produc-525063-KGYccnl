@@ -22,7 +22,7 @@
   <script id='query_one'>
     function main() {
       return People()
-      .filter(function(user) { return user.properties['Company Name'] && user.properties['Company Group'] && user.properties['Company Status'] == 'active'; })
+      .filter(function(user) { return user.properties['Company Name'] && user.properties['Company Group'] && user.properties['Company Status'] == 'active' && user.properties['Status'] == 'active'; })
       .groupBy(['properties.Company Name', 'properties.Company Group'], mixpanel.reducer.count());
     }
   </script>
@@ -44,7 +44,7 @@
         }),
         People()
       ).filter(function(tuple) {
-        if(tuple.user !== undefined && tuple.user.properties['Company Status'] == 'active') {
+        if(tuple.user !== undefined && tuple.user.properties['Company Status'] == 'active'  && tuple.user.properties['Status'] == 'active') {
           if(tuple.event !== undefined && events.indexOf(tuple.event.name) > -1) {
             return tuple;
           }
@@ -71,7 +71,7 @@
         }),
         People()
       ).filter(function(tuple) {
-        if(tuple.user !== undefined && tuple.user.properties['Company Status'] == 'active') {
+        if(tuple.user !== undefined && tuple.user.properties['Company Status'] == 'active' && user.properties['Status'] == 'active') {
           if(tuple.event !== undefined && events.indexOf(tuple.event.name) > -1) {
             return tuple;
           }
