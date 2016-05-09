@@ -71,7 +71,7 @@
         }),
         People()
       ).filter(function(tuple) {
-        if(tuple.user !== undefined && tuple.user.properties['Company Status'] == 'active' && user.properties['Status'] == 'active') {
+        if(tuple.user !== undefined && tuple.user.properties['Company Status'] == 'active' && tuple.user.properties['Status'] == 'active') {
           if(tuple.event !== undefined && events.indexOf(tuple.event.name) > -1) {
             return tuple;
           }
