@@ -28,7 +28,7 @@
   </script>
   <script id='query_two'>
     function main() {
-      var events = ["Comment", "Like", "Donation", "Product Purchase - Step3", "Volunteer Experience Share", "Campaign Social Share", "Volunteer Experience View"];
+      var events = ["Comment", "Like", "Donation", "Product Purchase - Step3", "Volunteer Experience Share", "Campaign Social Share", "Volunteer Experience View", "Pulse Page View", "Last Login"];
       function get30days() {
         var oldDate = new Date(new Date() - 60*60*24*30*1000);
         return oldDate.toISOString().substring(0, 10);
@@ -55,7 +55,7 @@
   </script>
   <script id='query_three'>
     function main() {
-      var events = ["Comment", "Like", "Donation", "Product Purchase - Step3", "Volunteer Experience Share", "Campaign Social Share", "Volunteer Experience View"];
+      var events = ["Comment", "Like", "Donation", "Product Purchase - Step3", "Volunteer Experience Share", "Campaign Social Share", "Volunteer Experience View", "Pulse Page View", "Last Login"];
       function get30days() {
         var oldDate = new Date(new Date() - 60*60*24*90*1000);
         return oldDate.toISOString().substring(0, 10);
